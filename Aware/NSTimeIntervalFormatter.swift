@@ -25,4 +25,25 @@ class NSTimeIntervalFormatter {
             return "\(minutes / 60)h \(minutes % 60)m"
         }
     }
+    
+    /**
+        Formats time interval as a fully extended human readable duration string.
+
+        - Parameters:
+            - interval: The time interval in seconds.
+
+        - Returns: A `String`.
+     */
+    func stringFromTimeIntervalExtended(_ interval: TimeInterval) -> String {
+        let minutes = NSInteger(interval) / 60
+        let minuteValue = minutes % 60
+        let minuteString = minuteValue > 1 ? "minutes" : "minute"
+        if minutes < 60 {
+            return "\(minuteValue) \(minuteString)"
+        } else {
+            let hourValue = minutes / 60
+            let hourString = hourValue > 1 ? "hours" : "hour"
+            return "\(hourValue) \(hourString) and \(minuteValue) \(minuteString)"
+        }
+    }
 }
